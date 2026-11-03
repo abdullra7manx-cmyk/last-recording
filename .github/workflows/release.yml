@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [windows-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 40
     steps:
@@ -61,7 +61,6 @@ jobs:
             ## التسجيل الأخير — نزّل اللعبة
             - **ويندوز (تثبيت):** `LastRecording-Windows-Setup.exe`
             - **ويندوز (بدون تثبيت):** `LastRecording-Windows-Portable.exe`
-            - **ماك:** `LastRecording-Mac.dmg` (أول مرة: كلك يمين على التطبيق ← Open)
             - **لينكس:** `LastRecording-Linux.AppImage`
             - **تشغيل من المتصفح:** `LastRecording-Browser.zip` ← فك الضغط وافتح `index.html`
 

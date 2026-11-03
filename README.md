@@ -9,7 +9,6 @@
 |---|---|
 | ويندوز (تثبيت) | `LastRecording-Windows-Setup.exe` |
 | ويندوز (بدون تثبيت) | `LastRecording-Windows-Portable.exe` |
-| ماك | `LastRecording-Mac.dmg` |
 | لينكس | `LastRecording-Linux.AppImage` |
 | أي جهاز من المتصفح | `LastRecording-Browser.zip` ← فك الضغط وافتح `index.html` |
 
