@@ -7,7 +7,7 @@
 <meta name="description" content="التسجيل الأخير: لعبة رعب نفسي وقصة للويندوز داخل مول نيون مهجور.">
 <meta property="og:title" content="التسجيل الأخير — The Last Recording">
 <meta property="og:image" content="shot-aim.jpg">
-<link rel="stylesheet" href="play/vendor/fonts.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=VT323&display=swap">
 <style>
 /* Store page: VHS viewfinder hero, two edition cards, gallery. Dark by design. */
 :root{--void:#030308;--panel:#0a0c18;--line:#1d2238;--ink:#e9f3ff;--dim:#8a93b0;--cyan:#3fe2ff;--red:#ff2a3a;--gold:#f3c64a;
@@ -82,7 +82,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
 <label for="sMail">البريد الإلكتروني</label><input id="sMail" type="email" required maxlength="80" autocomplete="email">
 <div class="cta"><button class="btn solid" type="submit">دخول</button><button class="btn" type="button" id="sCancel">إلغاء</button></div></form></div>
 <header class="hero">
-  <img src="shot-aim.jpg" alt="لقطة من اللعبة: مسدس مصوّب داخل المول والظلال واقفة">
+  <img src="https://raw.githubusercontent.com/abdullra7manx-cmyk/last-recording/main/docs/shot-aim.jpg" alt="لقطة من اللعبة: مسدس مصوّب داخل المول والظلال واقفة">
   <div class="wrap">
     <div class="en">THE LAST RECORDING</div>
     <h1>التسجيل الأخير</h1>
@@ -99,7 +99,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
   <div class="editions">
     <article class="ed">
       <div class="ed-head"><h3>نسخة الديمو</h3></div>
-      <div class="price">مجاناً</div>
+      <div class="price" style="font-family:var(--display)">مجاناً</div>
       <ul><li>بداية القصة: شريطين من خمسة</li><li>المسدس والظلال والمول كامل</li><li>بدون أونلاين</li><li>للويندوز</li></ul>
       <a class="btn" href="https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Demo-Setup.exe">تحميل الديمو مجاناً</a>
     </article>
@@ -139,9 +139,9 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
   <div class="tag">SCREENSHOTS</div>
   <h2>من داخل المول</h2>
   <div class="gal">
-    <figure><img src="shot-aim.jpg" alt="تصويب المسدس على ظل" loading="lazy"><figcaption>الطلقة في الراس تقتل. لا تضيّع ولا طلقة.</figcaption></figure>
-    <figure><img src="shot-siren.jpg" alt="العالم الأحمر بعد الصفّارة" loading="lazy"><figcaption>إذا سمعت الصفّارة… المول ما عاد هو المول.</figcaption></figure>
-    <figure><img src="shot-menu.jpg" alt="القائمة الرئيسية" loading="lazy"><figcaption>القائمة الرئيسية — قصة، أونلاين، إعدادات.</figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/abdullra7manx-cmyk/last-recording/main/docs/shot-aim.jpg" alt="تصويب المسدس على ظل" loading="lazy"><figcaption>الطلقة في الراس تقتل. لا تضيّع ولا طلقة.</figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/abdullra7manx-cmyk/last-recording/main/docs/shot-siren.jpg" alt="العالم الأحمر بعد الصفّارة" loading="lazy"><figcaption>إذا سمعت الصفّارة… المول ما عاد هو المول.</figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/abdullra7manx-cmyk/last-recording/main/docs/shot-menu.jpg" alt="القائمة الرئيسية" loading="lazy"><figcaption>القائمة الرئيسية — قصة، أونلاين، إعدادات.</figcaption></figure>
   </div>
 </section>
 
@@ -178,7 +178,7 @@ $('sCancel').onclick=()=>{$('modal').hidden=true};
 $('modal').onclick=e=>{if(e.target.id==='modal')$('modal').hidden=true};
 $('signForm').onsubmit=e=>{e.preventDefault();acc={name:$('sName').value.trim().slice(0,30),email:$('sMail').value.trim().slice(0,80)};try{localStorage.setItem(K,JSON.stringify(acc))}catch(e){}$('modal').hidden=true;paint()};
 paint();
-fetch('version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{if(v&&v.version)$('ver').textContent=String(v.version).slice(0,12)}).catch(()=>{});
+fetch('https://raw.githubusercontent.com/abdullra7manx-cmyk/last-recording/main/docs/version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{if(v&&v.version)$('ver').textContent=String(v.version).slice(0,12)}).catch(()=>{});
 })();
 </script>
 </body>
