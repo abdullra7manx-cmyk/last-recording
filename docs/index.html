@@ -65,7 +65,7 @@ h2{font-family:var(--display);font-weight:400;font-size:42px;margin:0 0 6px}
 .brand{font-family:var(--display);font-weight:400;font-size:24px}
 .acct{display:flex;align-items:center;gap:12px;min-width:0}#hello{color:var(--cyan);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .btn.small{padding:8px 16px;font-size:15px;background:none;font-family:inherit;cursor:pointer}
-button.btn{font-family:inherit;cursor:pointer;background:none}button.btn.solid{background:var(--red)}
+button.btn{font-family:inherit;cursor:pointer;background:none}button.btn:disabled{opacity:.6;cursor:default}.ed .buy{align-self:flex-start;margin-top:auto;min-width:160px;justify-content:center}button.btn.solid{background:var(--red)}
 .modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;padding:16px}
 .modal[hidden]{display:none}
 .box{background:var(--panel);border:2px solid var(--cyan);padding:26px;width:min(420px,100%);display:flex;flex-direction:column;gap:8px}
@@ -81,14 +81,20 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
 <label for="sName">الاسم</label><input id="sName" required maxlength="30" autocomplete="name">
 <label for="sMail">البريد الإلكتروني</label><input id="sMail" type="email" required maxlength="80" autocomplete="email">
 <div class="cta"><button class="btn solid" type="submit">دخول</button><button class="btn" type="button" id="sCancel">إلغاء</button></div></form></div>
+<div class="modal" id="buyModal" hidden><div class="box" id="buyBox">
+  <h3 id="bTitle">شراء</h3><p class="opt" id="bEd"></p>
+  <div class="price" id="bPrice" style="font-size:44px"></div>
+  <label for="bMail">البريد الإلكتروني (للفاتورة)</label><input id="bMail" type="email" maxlength="80" autocomplete="email">
+  <div class="cta"><button class="btn solid" type="button" id="bGo">إتمام الشراء</button><button class="btn" type="button" id="bCancel">إلغاء</button></div>
+  <p class="opt" id="bMsg"></p></div></div>
 <header class="hero">
   <img src="https://raw.githubusercontent.com/abdullra7manx-cmyk/last-recording/main/docs/shot-aim.jpg" alt="لقطة من اللعبة: مسدس مصوّب داخل المول والظلال واقفة">
   <div class="wrap">
     <div class="en">THE LAST RECORDING</div>
     <h1>التسجيل الأخير</h1>
     <p class="lead">٣:٣٣ الفجر. ميغا مول مقفّل من سبع سنين، و٢١٤ شخص اختفوا فيه بليلة وحدة. الأضواء رجعت تشتغل. معك كاميرا، ومسدس، واثنعشر طلقة. لا تعطيهم ظهرك.</p>
-    <div class="cta"><a class="btn solid" href="#editions">حمّل اللعبة</a><a class="btn" href="#editions">الديمو المجاني</a></div>
-    <div class="meta">PC · WINDOWS 10/11 ONLY · VER <span id="ver">00.00.02</span> · ONLINE CO-OP</div>
+    <div class="cta"><a class="btn solid" href="#editions">اشترِ اللعبة</a></div>
+    <div class="meta">PC · WINDOWS 10/11 ONLY · VER <span id="ver">00.00.03</span> · ONLINE CO-OP</div>
   </div>
 </header>
 
@@ -100,14 +106,14 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
     <article class="ed">
       <div class="ed-head"><h3>نسخة الديمو</h3></div>
       <div class="price" style="font-family:var(--display)">مجاناً</div>
-      <ul><li>بداية القصة: شريطين من خمسة</li><li>المسدس والظلال والمول كامل</li><li>بدون أونلاين</li><li>للويندوز</li></ul>
-      <a class="btn" href="https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Demo-Setup.exe">تحميل الديمو مجاناً</a>
+      <ul><li>اللعبة كاملة: القصة والأشرطة الخمسة</li><li>أونلاين مع أصحابك</li><li>تحديثات تلقائية</li><li>ويندوز 10/11</li></ul>
+      <button class="btn buy" type="button" data-ed="demo" data-name="نسخة الديمو" data-price="مجاناً">شراء</button>
     </article>
     <article class="ed">
       <div class="ed-head"><h3>النسخة القياسية</h3></div>
       <div class="price">$69.99</div>
-      <ul><li>القصة كاملة والأشرطة الخمسة</li><li>أونلاين مع أصحابك بكود غرفة</li><li>التحديثات توصلك تلقائياً</li></ul>
-      <a class="btn solid dl" href="https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Windows-Setup.exe">تحميل للويندوز</a>
+      <ul><li>اللعبة كاملة: القصة والأشرطة الخمسة</li><li>أونلاين مع أصحابك</li><li>تحديثات تلقائية</li><li>ويندوز 10/11</li></ul>
+      <button class="btn solid buy" type="button" data-ed="standard" data-name="النسخة القياسية" data-price="$69.99">شراء</button>
     </article>
     <article class="ed gold">
       <div class="ed-head">
@@ -128,11 +134,11 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
         </svg>
       </div>
       <div class="price">$999,999.99</div>
-      <ul><li>كل شي في النسخة القياسية</li><li>البيضة الذهبية</li><li>اسمك يبقى في تاريخ المول للأبد</li></ul>
-      <a class="btn gold dl" href="https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Windows-Setup.exe">تحميل للويندوز</a>
+      <ul><li>اللعبة كاملة: القصة والأشرطة الخمسة</li><li>أونلاين مع أصحابك</li><li>تحديثات تلقائية</li><li>ويندوز 10/11</li></ul>
+      <button class="btn gold buy" type="button" data-ed="gold" data-name="النسخة الذهبية" data-price="$999,999.99">شراء</button>
     </article>
   </div>
-  <p class="note">اللعبة للكمبيوتر (ويندوز) فقط — ما تشتغل على المتصفح أو الجوال. ويندوز ممكن يطلع تحذير لأن البرنامج غير موقّع: اضغط More info ثم Run anyway. بعد التثبيت، اللعبة تحدّث نفسها تلقائياً كل ما تفتحها.</p>
+  <p class="note">كل النسخ نفس اللعبة. اللعبة للكمبيوتر (ويندوز) فقط — ما تشتغل على المتصفح أو الجوال. ويندوز ممكن يطلع تحذير لأن البرنامج غير موقّع: اضغط More info ثم Run anyway. بعد التثبيت، اللعبة تحدّث نفسها تلقائياً كل ما تفتحها.</p>
 </section>
 
 <section class="wrap">
@@ -178,6 +184,18 @@ $('sCancel').onclick=()=>{$('modal').hidden=true};
 $('modal').onclick=e=>{if(e.target.id==='modal')$('modal').hidden=true};
 $('signForm').onsubmit=e=>{e.preventDefault();acc={name:$('sName').value.trim().slice(0,30),email:$('sMail').value.trim().slice(0,80)};try{localStorage.setItem(K,JSON.stringify(acc))}catch(e){}$('modal').hidden=true;paint()};
 paint();
+// Checkout: each edition can point to a payment page (Stripe Payment Link, Gumroad, Lemon Squeezy...).
+// Leave a link empty and the purchase completes straight to the download.
+const PAY_LINKS={demo:'',standard:'',gold:''};
+const DL='https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Windows-Setup.exe';
+let cur=null;
+document.querySelectorAll('.buy').forEach(b=>b.onclick=()=>{cur=b.dataset;$('bEd').textContent=cur.name;$('bPrice').textContent=cur.price;$('bMsg').textContent='';$('bMail').value=acc&&acc.email||'';$('bGo').disabled=false;$('bGo').textContent='إتمام الشراء';$('buyModal').hidden=false});
+$('bCancel').onclick=()=>{$('buyModal').hidden=true};
+$('buyModal').onclick=e=>{if(e.target.id==='buyModal')$('buyModal').hidden=true};
+$('bGo').onclick=()=>{if(!cur)return;const link=PAY_LINKS[cur.ed];
+  if(link){location.href=link+(link.includes('?')?'&':'?')+'prefilled_email='+encodeURIComponent($('bMail').value.trim());return}
+  $('bMsg').textContent='تم! بدأ تحميل اللعبة. افتح الملف بعد ما يخلص وثبّت اللعبة.';$('bGo').textContent='تم الشراء';$('bGo').disabled=true;
+  const a=document.createElement('a');a.href=DL;a.rel='noopener';document.body.appendChild(a);a.click();a.remove()};
 fetch('https://raw.githubusercontent.com/abdullra7manx-cmyk/last-recording/main/docs/version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{if(v&&v.version)$('ver').textContent=String(v.version).slice(0,12)}).catch(()=>{});
 })();
 </script>

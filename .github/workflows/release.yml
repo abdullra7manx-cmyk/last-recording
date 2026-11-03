@@ -26,15 +26,11 @@ jobs:
       - run: npm run dist
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
-      - run: npm run dist:demo
-        env:
-          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
       - uses: actions/upload-artifact@v4
         with:
           name: build-${{ matrix.os }}
           path: |
             dist/*.exe
-            dist-demo/*.exe
             dist/*.dmg
             dist/*.AppImage
           if-no-files-found: ignore
@@ -49,8 +45,6 @@ jobs:
         with:
           path: out
           merge-multiple: true
-      - name: Web version (zip)
-        run: cd game && zip -r ../out/LastRecording-Browser.zip . && cd ..
       - name: Version
         id: v
         run: echo "tag=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
@@ -60,12 +54,11 @@ jobs:
           target_commitish: ${{ github.sha }}
           make_latest: true
           name: التسجيل الأخير ${{ steps.v.outputs.tag }}
-          files: out/*
+          files: |
+            out/**/*.exe
           body: |
             ## التسجيل الأخير — نزّل اللعبة
             - **ويندوز (تثبيت):** `LastRecording-Windows-Setup.exe`
             - **ويندوز (بدون تثبيت):** `LastRecording-Windows-Portable.exe`
-            - **الديمو المجاني:** `LastRecording-Demo-Setup.exe`
-            - **تشغيل من المتصفح:** `LastRecording-Browser.zip` ← فك الضغط وافتح `index.html`
 
             ويندوز ممكن يطلع تحذير SmartScreen لأن التطبيق غير موقّع: اضغط *More info* ثم *Run anyway*.
