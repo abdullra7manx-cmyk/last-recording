@@ -71,22 +71,70 @@ button.btn{font-family:inherit;cursor:pointer;background:none}button.btn:disable
 .box{background:var(--panel);border:2px solid var(--cyan);padding:26px;width:min(420px,100%);display:flex;flex-direction:column;gap:8px}
 .box h3{font-family:var(--display);font-weight:400;font-size:30px;margin:0}.opt{color:var(--dim);margin:0 0 6px;font-size:14px}
 .box input{font:inherit;font-size:16px;padding:10px 12px;background:#000;color:#fff;border:2px solid var(--line)}.box input:focus{outline:none;border-color:var(--cyan)}
+.gate{position:fixed;inset:0;z-index:60;background:radial-gradient(80% 60% at 50% 30%,rgba(63,226,255,.08),transparent),#030308;display:flex;align-items:flex-start;justify-content:center;padding:16px;overflow:auto}
+.gate[hidden],.editions[hidden],.owned[hidden]{display:none}
+.auth{width:min(440px,100%);margin:auto 0}
+.auth form{display:flex;flex-direction:column;gap:8px}
+.auth form[hidden]{display:none}
+.tabs{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--line);margin:6px 0 10px}
+.tabs button{all:unset;cursor:pointer;text-align:center;padding:10px;font-weight:700}
+.tabs button.on{background:var(--cyan);color:#020208}
+.tabs button:focus-visible{outline:2px solid #fff}
+.wide{justify-content:center;margin-top:8px;width:100%}
+.err{color:#ff6b77;min-height:1.2em;margin:4px 0 0;font-size:14px}
+.row2{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 0;border-bottom:1px solid var(--line)}
+.row2.total{font-weight:700;font-size:20px;border-bottom:0}
+.num{font-family:var(--osd);font-size:28px;direction:ltr}
+.num s{opacity:.5;margin-inline-end:8px}
+.codeRow{display:flex;gap:8px}.codeRow input{flex:1;min-width:0}
+.owned{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:20px;padding:22px;border:2px solid var(--cyan);background:var(--panel)}
+.owned b{display:block;font-family:var(--display);font-weight:400;font-size:30px}.owned span{color:var(--dim)}
 footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font-size:14px}
 @media (prefers-reduced-motion:reduce){.egg,.rec i{animation:none}}
 </style>
 </head>
 <body>
-<nav class="top"><div class="wrap topin"><b class="brand">التسجيل الأخير</b><div class="acct"><span id="hello" hidden></span><button class="btn small" id="signBtn" type="button">تسجيل الدخول</button></div></div></nav>
-<div class="modal" id="modal" hidden><form class="box" id="signForm"><h3>تسجيل الدخول</h3><p class="opt">اختياري — تقدر تحمّل اللعبة بدون حساب.</p>
-<label for="sName">الاسم</label><input id="sName" required maxlength="30" autocomplete="name">
-<label for="sMail">البريد الإلكتروني</label><input id="sMail" type="email" required maxlength="80" autocomplete="email">
-<div class="cta"><button class="btn solid" type="submit">دخول</button><button class="btn" type="button" id="sCancel">إلغاء</button></div></form></div>
+<nav class="top"><div class="wrap topin"><b class="brand">التسجيل الأخير</b><div class="acct"><span id="hello"></span><button class="btn small" id="outBtn" type="button">تسجيل الخروج</button></div></div></nav>
+
+<div class="gate" id="gate">
+  <div class="box auth">
+    <div class="en" style="text-align:center">THE LAST RECORDING</div>
+    <h3 style="text-align:center;font-size:40px">التسجيل الأخير</h3>
+    <div class="tabs" role="tablist"><button type="button" role="tab" id="tLogin" class="on">تسجيل الدخول</button><button type="button" role="tab" id="tSign">إنشاء حساب</button></div>
+    <form id="fLogin" autocomplete="on">
+      <label for="lMail">البريد الإلكتروني</label><input id="lMail" type="email" required maxlength="120" autocomplete="username">
+      <label for="lPass">كلمة المرور</label><input id="lPass" type="password" required maxlength="128" autocomplete="current-password">
+      <button class="btn solid wide" type="submit">دخول</button>
+    </form>
+    <form id="fSign" hidden autocomplete="on">
+      <label for="sMail">البريد الإلكتروني</label><input id="sMail" type="email" required maxlength="120" autocomplete="username">
+      <label for="sPass">كلمة المرور</label><input id="sPass" type="password" required minlength="8" maxlength="128" autocomplete="new-password">
+      <label for="sPass2">تأكيد كلمة المرور</label><input id="sPass2" type="password" required minlength="8" maxlength="128" autocomplete="new-password">
+      <p class="opt">كلمة مرور خاصة بهذا الموقع — لا تستخدم كلمة مرور إيميلك. ٨ أحرف على الأقل، فيها حرف ورقم.</p>
+      <button class="btn solid wide" type="submit">إنشاء الحساب</button>
+    </form>
+    <p class="err" id="aErr" role="alert"></p>
+    <p class="opt" id="modeNote"></p>
+  </div>
+</div>
+
 <div class="modal" id="buyModal" hidden><div class="box" id="buyBox">
-  <h3 id="bTitle">شراء</h3><p class="opt" id="bEd"></p>
-  <div class="price" id="bPrice" style="font-size:44px"></div>
-  <label for="bMail">البريد الإلكتروني (للفاتورة)</label><input id="bMail" type="email" maxlength="80" autocomplete="email">
-  <div class="cta"><button class="btn solid" type="button" id="bGo">إتمام الشراء</button><button class="btn" type="button" id="bCancel">إلغاء</button></div>
-  <p class="opt" id="bMsg"></p></div></div>
+  <div id="bStep1">
+    <h3>شراء</h3><p class="opt" id="bEd"></p>
+    <div class="row2"><span>السعر</span><span class="num" id="bBase"></span></div>
+    <label for="bCode">كود الخصم</label>
+    <div class="codeRow"><input id="bCode" maxlength="24" autocomplete="off" style="direction:ltr;text-transform:uppercase"><button class="btn small" type="button" id="bApply">تطبيق</button></div>
+    <p class="opt" id="bCodeMsg"></p>
+    <div class="row2 total"><span>الإجمالي</span><span class="num" id="bTotal"></span></div>
+    <div class="cta"><button class="btn solid" type="button" id="bGo">إتمام الشراء</button><button class="btn" type="button" id="bCancel">إلغاء</button></div>
+    <p class="err" id="bErr" role="alert"></p>
+  </div>
+  <div id="bStep2" hidden>
+    <h3>شكراً على الشراء</h3>
+    <p id="bThanks"></p>
+    <div class="cta"><a class="btn solid" id="bDl" href="#">تحميل اللعبة</a><button class="btn" type="button" id="bClose">إغلاق</button></div>
+  </div>
+</div></div>
 <header class="hero">
   <img src="https://raw.githubusercontent.com/abdullra7manx-cmyk/last-recording/main/docs/shot-aim.jpg" alt="لقطة من اللعبة: مسدس مصوّب داخل المول والظلال واقفة">
   <div class="wrap">
@@ -101,8 +149,9 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
 <main>
 <section class="wrap" id="editions">
   <div class="tag">EDITIONS</div>
-  <h2>اختر نسختك</h2>
-  <div class="editions">
+  <h2 id="edTitle">اختر نسختك</h2>
+  <div class="owned" id="owned" hidden><div><b id="ownName"></b><span id="ownMeta"></span></div><a class="btn solid" id="ownDl" href="#">تحميل اللعبة</a></div>
+  <div class="editions" id="edGrid">
     <article class="ed">
       <div class="ed-head"><h3>نسخة الديمو</h3></div>
       <div class="price" style="font-family:var(--display)">مجاناً</div>
@@ -176,28 +225,102 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
 </main>
 <footer><div class="wrap">التسجيل الأخير · <a href="https://github.com/abdullra7manx-cmyk/last-recording/blob/main/CHANGELOG.md">سجل التحديثات</a></div></footer>
 <script>
-(function(){const K='lr-account';const $=i=>document.getElementById(i);let acc=null;
-try{acc=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
-function paint(){if(acc&&acc.name){$('hello').hidden=false;$('hello').textContent='أهلاً '+acc.name;$('signBtn').textContent='تسجيل الخروج'}else{$('hello').hidden=true;$('signBtn').textContent='تسجيل الدخول'}}
-$('signBtn').onclick=()=>{if(acc){acc=null;try{localStorage.removeItem(K)}catch(e){}paint()}else{$('modal').hidden=false;$('sName').focus()}};
-$('sCancel').onclick=()=>{$('modal').hidden=true};
-$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').hidden=true};
-$('signForm').onsubmit=e=>{e.preventDefault();acc={name:$('sName').value.trim().slice(0,30),email:$('sMail').value.trim().slice(0,80)};try{localStorage.setItem(K,JSON.stringify(acc))}catch(e){}$('modal').hidden=true;paint()};
-paint();
-// Checkout: each edition can point to a payment page (Stripe Payment Link, Gumroad, Lemon Squeezy...).
-// Leave a link empty and the purchase completes straight to the download.
-const PAY_LINKS={demo:'',standard:'',gold:''};
+/* Accounts + purchases.
+   SERVER MODE (secure, shared across devices): fill CFG.supabaseUrl / supabaseKey and the Stripe payment links.
+     Supabase Auth stores passwords (bcrypt) and the `purchases` table + `claim_free` function in supabase/schema.sql
+     enforce one purchase per account and the discount code on the server. Card details are entered on Stripe's own page.
+   TEST MODE (until then): accounts live only in this browser. Passwords are never stored — only a salted PBKDF2-SHA256 hash. */
+const CFG={supabaseUrl:'',supabaseKey:'',payLinks:{standard:'',gold:''}};
 const DL='https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Windows-Setup.exe';
-let cur=null;
-document.querySelectorAll('.buy').forEach(b=>b.onclick=()=>{cur=b.dataset;$('bEd').textContent=cur.name;$('bPrice').textContent=cur.price;$('bMsg').textContent='';$('bMail').value=acc&&acc.email||'';$('bGo').disabled=false;$('bGo').textContent='إتمام الشراء';$('buyModal').hidden=false});
+const ED={demo:{name:'نسخة الديمو',cents:0},standard:{name:'النسخة القياسية',cents:6999},gold:{name:'النسخة الذهبية',cents:99999999}};
+const COUPONS={ABC466:{edition:'standard',off:1}}; // test mode only; server mode checks codes in claim_free()
+const $=i=>document.getElementById(i);
+const money=c=>'$'+(c/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+/* ---------- test-mode backend (this browser only) ---------- */
+const LS={get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
+const b64=buf=>btoa(String.fromCharCode(...new Uint8Array(buf)));
+async function pbkdf2(pw,saltB64){const salt=Uint8Array.from(atob(saltB64),c=>c.charCodeAt(0));const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveBits']);return b64(await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt,iterations:210000},key,256))}
+function eqConst(a,b){if(a.length!==b.length)return false;let r=0;for(let i=0;i<a.length;i++)r|=a.charCodeAt(i)^b.charCodeAt(i);return r===0}
+const Local={
+  async signUp(email,pw){if(!crypto.subtle)throw'المتصفح ما يدعم التشفير المطلوب.';const users=LS.get('lr-users',{});if(users[email])throw'فيه حساب بهذا الإيميل. سجّل دخولك.';
+    const salt=b64(crypto.getRandomValues(new Uint8Array(16)));users[email]={salt,hash:await pbkdf2(pw,salt),at:Date.now()};if(!LS.set('lr-users',users))throw'ما قدرت أحفظ الحساب في هذا المتصفح.';return this._start(email)},
+  async signIn(email,pw){const lock=LS.get('lr-lock',{});const l=lock[email];if(l&&l.until>Date.now())throw`محاولات كثيرة. جرّب بعد ${Math.ceil((l.until-Date.now())/1000)} ثانية.`;
+    const u=LS.get('lr-users',{})[email];const ok=u&&eqConst(await pbkdf2(pw,u.salt),u.hash);
+    if(!ok){const n=((l&&l.n)||0)+1;lock[email]={n,until:n>=5?Date.now()+60000:0};LS.set('lr-lock',lock);throw'الإيميل أو كلمة المرور غير صحيحة.'}
+    delete lock[email];LS.set('lr-lock',lock);return this._start(email)},
+  _start(email){const s={email,token:b64(crypto.getRandomValues(new Uint8Array(24))),exp:Date.now()+30*864e5};LS.set('lr-session',s);return{email}},
+  async session(){const s=LS.get('lr-session',null);if(!s||s.exp<Date.now()||!LS.get('lr-users',{})[s.email])return null;return{email:s.email}},
+  async signOut(){try{localStorage.removeItem('lr-session')}catch(e){}},
+  async purchase(email){return LS.get('lr-purchases',{})[email]||null},
+  async claim(email,edition,code){const all=LS.get('lr-purchases',{});if(all[email])throw'هذا الحساب اشترى نسخة من قبل.';
+    const c=code?COUPONS[code]:null;let cents=ED[edition].cents;if(c&&c.edition===edition)cents=Math.round(cents*(1-c.off));
+    if(cents>0)throw'PAY';all[email]={edition,cents,coupon:c?code:null,at:Date.now()};LS.set('lr-purchases',all);return all[email]}
+};
+/* ---------- server-mode backend (Supabase + Stripe) ---------- */
+let sb=null;
+const Server={
+  async signUp(email,pw){const{data,error}=await sb.auth.signUp({email,password:pw});if(error)throw error.message;if(!data.session)throw'تم إنشاء الحساب. افتح الإيميل وأكّد حسابك ثم سجّل دخولك.';return{email}},
+  async signIn(email,pw){const{error}=await sb.auth.signInWithPassword({email,password:pw});if(error)throw'الإيميل أو كلمة المرور غير صحيحة.';return{email}},
+  async session(){const{data}=await sb.auth.getSession();return data.session?{email:data.session.user.email,id:data.session.user.id}:null},
+  async signOut(){await sb.auth.signOut()},
+  async purchase(){const{data}=await sb.from('purchases').select('edition,amount_cents,coupon,created_at').maybeSingle();return data?{edition:data.edition,cents:data.amount_cents,coupon:data.coupon}:null},
+  async claim(email,edition,code){const{data,error}=await sb.rpc('claim_free',{p_edition:edition,p_code:code||''});
+    if(error){if(/payment required/.test(error.message))throw'PAY';if(/already/.test(error.message))throw'هذا الحساب اشترى نسخة من قبل.';throw error.message}
+    return{edition:data.edition,cents:data.amount_cents,coupon:data.coupon}}
+};
+let API=Local,me=null,owned=null,cur=null,applied=null;
+
+function setTab(sign){$('tSign').classList.toggle('on',sign);$('tLogin').classList.toggle('on',!sign);$('fSign').hidden=!sign;$('fLogin').hidden=sign;$('aErr').textContent=''}
+$('tLogin').onclick=()=>setTab(false);$('tSign').onclick=()=>setTab(true);
+function busy(form,on){form.querySelectorAll('button,input').forEach(x=>x.disabled=on)}
+$('fSign').onsubmit=async e=>{e.preventDefault();const em=$('sMail').value.trim().toLowerCase(),p1=$('sPass').value,p2=$('sPass2').value;
+  if(!EMAIL.test(em))return $('aErr').textContent='اكتب إيميل صحيح.';
+  if(p1.length<8||!/[A-Za-z؀-ۿ]/.test(p1)||!/\d/.test(p1))return $('aErr').textContent='كلمة المرور لازم تكون ٨ أحرف على الأقل وفيها حرف ورقم.';
+  if(p1!==p2)return $('aErr').textContent='كلمتا المرور غير متطابقتين.';
+  busy(e.target,true);$('aErr').textContent='';try{me=await API.signUp(em,p1);$('sPass').value=$('sPass2').value='';await enter()}catch(x){$('aErr').textContent=String(x)}busy(e.target,false)};
+$('fLogin').onsubmit=async e=>{e.preventDefault();const em=$('lMail').value.trim().toLowerCase(),p=$('lPass').value;
+  if(!EMAIL.test(em)||!p)return $('aErr').textContent='اكتب الإيميل وكلمة المرور.';
+  busy(e.target,true);$('aErr').textContent='';try{me=await API.signIn(em,p);$('lPass').value='';await enter()}catch(x){$('aErr').textContent=String(x)}busy(e.target,false)};
+$('outBtn').onclick=async()=>{await API.signOut();me=null;owned=null;['lMail','lPass','sMail','sPass','sPass2'].forEach(i=>$(i).value='');$('gate').hidden=false;setTab(false)};
+
+async function enter(){me=(await API.session())||me;if(!me){$('gate').hidden=false;return}
+  $('gate').hidden=true;$('hello').textContent=me.email;owned=await API.purchase(me.email);render()}
+function render(){
+  $('owned').hidden=!owned;$('edGrid').hidden=!!owned;$('edTitle').textContent=owned?'نسختك':'اختر نسختك';
+  if(owned){$('ownName').textContent=ED[owned.edition].name;$('ownMeta').textContent=`مسجّلة على ${me.email} · دفعت ${money(owned.cents)}${owned.coupon?' · كود '+owned.coupon:''}`;$('ownDl').href=DL}
+}
+document.querySelectorAll('.buy').forEach(b=>b.onclick=()=>{if(!me)return;cur=b.dataset.ed;applied=null;
+  $('bEd').textContent=ED[cur].name;$('bBase').textContent=ED[cur].cents?money(ED[cur].cents):'مجاناً';$('bCode').value='';$('bCodeMsg').textContent='';$('bErr').textContent='';
+  $('bStep1').hidden=false;$('bStep2').hidden=true;$('bGo').disabled=false;total();$('buyModal').hidden=false});
+function price(){const c=applied&&COUPONS[applied];return c&&c.edition===cur?Math.round(ED[cur].cents*(1-c.off)):ED[cur].cents}
+function total(){const p=price();$('bTotal').innerHTML=(p!==ED[cur].cents?`<s>${money(ED[cur].cents)}</s>`:'')+money(p);$('bGo').textContent=p>0?'الدفع بالبطاقة':'إتمام الشراء'}
+$('bApply').onclick=()=>{const code=$('bCode').value.trim().toUpperCase();applied=null;
+  if(!code){$('bCodeMsg').textContent='';return total()}
+  const c=COUPONS[code];if(!c){$('bCodeMsg').textContent='الكود غير صحيح.'}else if(c.edition!==cur){$('bCodeMsg').textContent='هذا الكود خاص بـ'+ED[c.edition].name+'.'}else{applied=code;$('bCodeMsg').textContent='تم تطبيق الكود ✓'}
+  total()};
 $('bCancel').onclick=()=>{$('buyModal').hidden=true};
-$('buyModal').onclick=e=>{if(e.target.id==='buyModal')$('buyModal').hidden=true};
-$('bGo').onclick=()=>{if(!cur)return;const link=PAY_LINKS[cur.ed];
-  if(link){location.href=link+(link.includes('?')?'&':'?')+'prefilled_email='+encodeURIComponent($('bMail').value.trim());return}
-  $('bMsg').textContent='تم! بدأ تحميل اللعبة. افتح الملف بعد ما يخلص وثبّت اللعبة.';$('bGo').textContent='تم الشراء';$('bGo').disabled=true;
-  const a=document.createElement('a');a.href=DL;a.rel='noopener';document.body.appendChild(a);a.click();a.remove()};
-fetch('https://raw.githubusercontent.com/abdullra7manx-cmyk/last-recording/main/docs/version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{if(v&&v.version)$('ver').textContent=String(v.version).slice(0,12)}).catch(()=>{});
+$('bClose').onclick=()=>{$('buyModal').hidden=true};
+$('bGo').onclick=async()=>{if(!cur||!me)return;$('bErr').textContent='';$('bGo').disabled=true;
+  try{owned=await API.claim(me.email,cur,applied||$('bCode').value.trim().toUpperCase());thanks()}
+  catch(x){if(x==='PAY'){const link=CFG.payLinks[cur];
+      if(API===Server&&link){location.href=link+(link.includes('?')?'&':'?')+'prefilled_email='+encodeURIComponent(me.email)+'&client_reference_id='+encodeURIComponent(me.id||'');return}
+      $('bErr').textContent='الدفع بالبطاقة يشتغل بعد ربط بوابة الدفع (Stripe). جرّب النسخة المجانية أو كود خصم.'}
+    else $('bErr').textContent=String(x)}
+  $('bGo').disabled=false};
+function thanks(){$('bStep1').hidden=true;$('bStep2').hidden=false;
+  $('bThanks').textContent=`شكراً على شرائك ${ED[owned.edition].name} بقيمة ${money(owned.cents)}. النسخة الحين مسجّلة على ${me.email}، وتقدر تحمّلها أي وقت من هنا.`;
+  $('bDl').href=DL;render()}
+
+(async()=>{
+  if(CFG.supabaseUrl&&CFG.supabaseKey){try{await new Promise((res,rej)=>{const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc)});
+    sb=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseKey);API=Server;
+    const q=new URLSearchParams(location.search);if(q.get('paid'))setTimeout(async()=>{owned=await API.purchase();render()},2500)}catch(e){API=Local}}
+  $('modeNote').textContent=API===Local?'وضع تجريبي: الحسابات محفوظة في هذا المتصفح فقط.':'';
+  await enter();
 })();
+fetch('https://raw.githubusercontent.com/abdullra7manx-cmyk/last-recording/main/docs/version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{if(v&&v.version)$('ver').textContent=String(v.version).slice(0,12)}).catch(()=>{});
 </script>
 </body>
 </html>
