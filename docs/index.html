@@ -60,19 +60,35 @@ h2{font-family:var(--display);font-weight:400;font-size:42px;margin:0 0 6px}
 .req dt{font-family:var(--osd);font-size:22px;color:var(--cyan);direction:ltr}
 .req dd{margin:0;color:#cfd8ff}
 .note{color:var(--dim);font-size:14px;margin-top:14px}
+.top{position:sticky;top:0;z-index:20;background:rgba(3,3,8,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.brand{font-family:var(--display);font-weight:400;font-size:24px}
+.acct{display:flex;align-items:center;gap:12px;min-width:0}#hello{color:var(--cyan);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btn.small{padding:8px 16px;font-size:15px;background:none;font-family:inherit;cursor:pointer}
+button.btn{font-family:inherit;cursor:pointer;background:none}button.btn.solid{background:var(--red)}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;padding:16px}
+.modal[hidden]{display:none}
+.box{background:var(--panel);border:2px solid var(--cyan);padding:26px;width:min(420px,100%);display:flex;flex-direction:column;gap:8px}
+.box h3{font-family:var(--display);font-weight:400;font-size:30px;margin:0}.opt{color:var(--dim);margin:0 0 6px;font-size:14px}
+.box input{font:inherit;font-size:16px;padding:10px 12px;background:#000;color:#fff;border:2px solid var(--line)}.box input:focus{outline:none;border-color:var(--cyan)}
 footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font-size:14px}
 @media (prefers-reduced-motion:reduce){.egg,.rec i{animation:none}}
 </style>
 </head>
 <body>
+<nav class="top"><div class="wrap topin"><b class="brand">التسجيل الأخير</b><div class="acct"><span id="hello" hidden></span><button class="btn small" id="signBtn" type="button">تسجيل الدخول</button></div></div></nav>
+<div class="modal" id="modal" hidden><form class="box" id="signForm"><h3>تسجيل الدخول</h3><p class="opt">اختياري — تقدر تحمّل اللعبة بدون حساب.</p>
+<label for="sName">الاسم</label><input id="sName" required maxlength="30" autocomplete="name">
+<label for="sMail">البريد الإلكتروني</label><input id="sMail" type="email" required maxlength="80" autocomplete="email">
+<div class="cta"><button class="btn solid" type="submit">دخول</button><button class="btn" type="button" id="sCancel">إلغاء</button></div></form></div>
 <header class="hero">
   <img src="shot-aim.jpg" alt="لقطة من اللعبة: مسدس مصوّب داخل المول والظلال واقفة">
   <div class="wrap">
     <div class="en">THE LAST RECORDING</div>
     <h1>التسجيل الأخير</h1>
     <p class="lead">٣:٣٣ الفجر. ميغا مول مقفّل من سبع سنين، و٢١٤ شخص اختفوا فيه بليلة وحدة. الأضواء رجعت تشتغل. معك كاميرا، ومسدس، واثنعشر طلقة. لا تعطيهم ظهرك.</p>
-    <div class="cta"><a class="btn solid" href="#editions">احصل على اللعبة</a><a class="btn" href="play/?demo=1">جرّب الديمو مجاناً</a></div>
-    <div class="meta">WINDOWS 10/11 · VER <span id="ver">00.00.01</span> · ONLINE CO-OP</div>
+    <div class="cta"><a class="btn solid" href="#editions">حمّل اللعبة</a><a class="btn" href="#editions">الديمو المجاني</a></div>
+    <div class="meta">PC · WINDOWS 10/11 ONLY · VER <span id="ver">00.00.02</span> · ONLINE CO-OP</div>
   </div>
 </header>
 
@@ -84,8 +100,8 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
     <article class="ed">
       <div class="ed-head"><h3>نسخة الديمو</h3></div>
       <div class="price">مجاناً</div>
-      <ul><li>بداية القصة: شريطين من خمسة</li><li>المسدس والظلال والمول كامل</li><li>بدون أونلاين</li></ul>
-      <div class="cta" style="margin-top:auto"><a class="btn" href="https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Demo-Setup.exe">تحميل الديمو</a><a class="btn" href="play/?demo=1">العب في المتصفح</a></div>
+      <ul><li>بداية القصة: شريطين من خمسة</li><li>المسدس والظلال والمول كامل</li><li>بدون أونلاين</li><li>للويندوز</li></ul>
+      <a class="btn" href="https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Demo-Setup.exe">تحميل الديمو مجاناً</a>
     </article>
     <article class="ed">
       <div class="ed-head"><h3>النسخة القياسية</h3></div>
@@ -116,7 +132,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
       <a class="btn gold dl" href="https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Windows-Setup.exe">تحميل للويندوز</a>
     </article>
   </div>
-  <p class="note">ويندوز ممكن يطلع تحذير لأن البرنامج غير موقّع: اضغط More info ثم Run anyway. بعد التثبيت، اللعبة تحدّث نفسها تلقائياً كل ما تفتحها وأنت متصل بالإنترنت.</p>
+  <p class="note">اللعبة للكمبيوتر (ويندوز) فقط — ما تشتغل على المتصفح أو الجوال. ويندوز ممكن يطلع تحذير لأن البرنامج غير موقّع: اضغط More info ثم Run anyway. بعد التثبيت، اللعبة تحدّث نفسها تلقائياً كل ما تفتحها.</p>
 </section>
 
 <section class="wrap">
@@ -154,7 +170,16 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
 </main>
 <footer><div class="wrap">التسجيل الأخير · <a href="https://github.com/abdullra7manx-cmyk/last-recording/blob/main/CHANGELOG.md">سجل التحديثات</a></div></footer>
 <script>
-fetch('version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{if(v&&v.version)document.getElementById('ver').textContent=String(v.version).slice(0,12)}).catch(()=>{});
+(function(){const K='lr-account';const $=i=>document.getElementById(i);let acc=null;
+try{acc=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
+function paint(){if(acc&&acc.name){$('hello').hidden=false;$('hello').textContent='أهلاً '+acc.name;$('signBtn').textContent='تسجيل الخروج'}else{$('hello').hidden=true;$('signBtn').textContent='تسجيل الدخول'}}
+$('signBtn').onclick=()=>{if(acc){acc=null;try{localStorage.removeItem(K)}catch(e){}paint()}else{$('modal').hidden=false;$('sName').focus()}};
+$('sCancel').onclick=()=>{$('modal').hidden=true};
+$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').hidden=true};
+$('signForm').onsubmit=e=>{e.preventDefault();acc={name:$('sName').value.trim().slice(0,30),email:$('sMail').value.trim().slice(0,80)};try{localStorage.setItem(K,JSON.stringify(acc))}catch(e){}$('modal').hidden=true;paint()};
+paint();
+fetch('version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{if(v&&v.version)$('ver').textContent=String(v.version).slice(0,12)}).catch(()=>{});
+})();
 </script>
 </body>
 </html>
