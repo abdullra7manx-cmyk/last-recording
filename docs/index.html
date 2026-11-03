@@ -37,16 +37,16 @@ h1{font-family:var(--display);font-weight:400;font-size:clamp(56px,10vw,128px);l
 section{padding-block:64px}
 h2{font-family:var(--display);font-weight:400;font-size:42px;margin:0 0 6px}
 .tag{font-family:var(--osd);color:var(--cyan);letter-spacing:3px;font-size:20px;direction:ltr;text-align:right}
-.editions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:22px;margin-top:26px}
+.editions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:22px;margin-top:26px}
 .ed{background:var(--panel);border:1px solid var(--line);padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
 .ed.gold{border-color:#7a5a12;background:radial-gradient(120% 90% at 85% 10%,rgba(243,198,74,.16),transparent 60%),var(--panel)}
 .ed-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .ed h3{font-family:var(--display);font-weight:400;font-size:32px;margin:0}
-.price{font-family:var(--osd);font-size:54px;line-height:1;direction:ltr;text-align:right}
+.price{font-family:var(--osd);font-size:50px;line-height:1;direction:ltr;text-align:right}
 .ed.gold .price{color:var(--gold);text-shadow:0 0 18px rgba(243,198,74,.45)}
 .ed ul{margin:0;padding-inline-start:20px;color:#cfd8ff}
 .ed .btn{align-self:flex-start;margin-top:auto}
-.egg{width:130px;flex:none;filter:drop-shadow(0 0 22px rgba(243,198,74,.55));animation:float 4s ease-in-out infinite}
+.egg{width:96px;flex:none;filter:drop-shadow(0 0 22px rgba(243,198,74,.55));animation:float 4s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-8px) rotate(3deg)}}
 .gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin-top:22px}
 .gal figure{margin:0;border:1px solid var(--line);background:#000}
@@ -71,7 +71,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
     <div class="en">THE LAST RECORDING</div>
     <h1>التسجيل الأخير</h1>
     <p class="lead">٣:٣٣ الفجر. ميغا مول مقفّل من سبع سنين، و٢١٤ شخص اختفوا فيه بليلة وحدة. الأضواء رجعت تشتغل. معك كاميرا، ومسدس، واثنعشر طلقة. لا تعطيهم ظهرك.</p>
-    <div class="cta"><a class="btn solid" href="#editions">احصل على اللعبة</a><a class="btn" href="play/">العب من المتصفح</a></div>
+    <div class="cta"><a class="btn solid" href="#editions">احصل على اللعبة</a><a class="btn" href="play/?demo=1">جرّب الديمو مجاناً</a></div>
     <div class="meta">WINDOWS 10/11 · VER <span id="ver">00.00.01</span> · ONLINE CO-OP</div>
   </div>
 </header>
@@ -81,6 +81,12 @@ footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font
   <div class="tag">EDITIONS</div>
   <h2>اختر نسختك</h2>
   <div class="editions">
+    <article class="ed">
+      <div class="ed-head"><h3>نسخة الديمو</h3></div>
+      <div class="price">مجاناً</div>
+      <ul><li>بداية القصة: شريطين من خمسة</li><li>المسدس والظلال والمول كامل</li><li>بدون أونلاين</li></ul>
+      <div class="cta" style="margin-top:auto"><a class="btn" href="https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Demo-Setup.exe">تحميل الديمو</a><a class="btn" href="play/?demo=1">العب في المتصفح</a></div>
+    </article>
     <article class="ed">
       <div class="ed-head"><h3>النسخة القياسية</h3></div>
       <div class="price">$69.99</div>

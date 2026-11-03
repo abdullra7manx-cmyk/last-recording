@@ -1,14 +1,15 @@
 {
   "name": "last-recording",
   "productName": "The Last Recording",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "التسجيل الأخير — لعبة رعب وقصة",
   "main": "main.js",
   "author": "abdullra7manx-cmyk",
   "license": "UNLICENSED",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --publish never"
+    "dist": "electron-builder --publish never",
+    "dist:demo": "electron-builder --publish never -c.extraMetadata.demo=true -c.productName=LastRecordingDemo -c.appId=com.abdullra7manx.lastrecording.demo -c.nsis.artifactName=LastRecording-Demo-Setup.exe -c.nsis.shortcutName=LastRecordingDemo -c.portable.artifactName=LastRecording-Demo-Portable.exe -c.directories.output=dist-demo"
   },
   "devDependencies": {
     "electron": "33.2.1",
