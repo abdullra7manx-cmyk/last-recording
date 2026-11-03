@@ -1,7 +1,7 @@
 {
   "name": "last-recording",
   "productName": "The Last Recording",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "التسجيل الأخير — لعبة رعب وقصة",
   "main": "main.js",
   "author": "abdullra7manx-cmyk",
@@ -50,31 +50,6 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "shortcutName": "التسجيل الأخير"
-    },
-    "mac": {
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "arm64"
-          ]
-        }
-      ],
-      "category": "public.app-category.games",
-      "artifactName": "LastRecording-Mac.${ext}",
-      "identity": null
-    },
-    "linux": {
-      "target": [
-        {
-          "target": "AppImage",
-          "arch": [
-            "x64"
-          ]
-        }
-      ],
-      "category": "Game",
-      "artifactName": "LastRecording-Linux.${ext}"
     }
   }
 }
