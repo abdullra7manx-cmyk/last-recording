@@ -18,12 +18,63 @@
     "appId": "com.abdullra7manx.lastrecording",
     "productName": "The Last Recording",
     "artifactName": "LastRecording-${os}-${arch}.${ext}",
-    "files": ["main.js", "game/**/*"],
-    "directories": { "output": "dist", "buildResources": "build" },
-    "win": { "target": [{ "target": "nsis", "arch": ["x64"] }, { "target": "portable", "arch": ["x64"] }] },
-    "portable": { "artifactName": "LastRecording-Windows-Portable.exe" },
-    "nsis": { "artifactName": "LastRecording-Windows-Setup.exe", "oneClick": false, "allowToChangeInstallationDirectory": true, "shortcutName": "التسجيل الأخير" },
-    "mac": { "target": [{ "target": "dmg", "arch": ["universal"] }], "category": "public.app-category.games", "artifactName": "LastRecording-Mac.${ext}", "identity": null },
-    "linux": { "target": [{ "target": "AppImage", "arch": ["x64"] }], "category": "Game", "artifactName": "LastRecording-Linux.${ext}" }
+    "files": [
+      "main.js",
+      "game/**/*"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "LastRecording-Windows-Portable.exe"
+    },
+    "nsis": {
+      "artifactName": "LastRecording-Windows-Setup.exe",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "التسجيل الأخير"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.games",
+      "artifactName": "LastRecording-Mac.${ext}",
+      "identity": null
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Game",
+      "artifactName": "LastRecording-Linux.${ext}"
+    }
   }
 }
