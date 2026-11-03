@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>التسجيل الأخير — The Last Recording</title>
+<meta name="description" content="التسجيل الأخير: لعبة رعب نفسي وقصة للويندوز داخل مول نيون مهجور.">
+<meta property="og:title" content="التسجيل الأخير — The Last Recording">
+<meta property="og:image" content="shot-aim.jpg">
+<link rel="stylesheet" href="play/vendor/fonts.css">
+<style>
+/* Store page: VHS viewfinder hero, two edition cards, gallery. Dark by design. */
+:root{--void:#030308;--panel:#0a0c18;--line:#1d2238;--ink:#e9f3ff;--dim:#8a93b0;--cyan:#3fe2ff;--red:#ff2a3a;--gold:#f3c64a;
+  --display:"Lalezar","IBM Plex Sans Arabic",Tahoma,sans-serif;--body:"IBM Plex Sans Arabic",Tahoma,sans-serif;--osd:"VT323","Courier New",monospace;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--ink);font-family:var(--body);line-height:1.7}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left)) max(16px,env(safe-area-inset-right))}
+.hero{position:relative;min-height:min(86vh,760px);display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.15) contrast(1.05)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--void) 4%,rgba(3,3,8,.6) 40%,rgba(3,3,8,.15) 75%),repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
+.rec{position:absolute;top:22px;left:24px;z-index:2;font-family:var(--osd);font-size:36px;display:flex;gap:10px;align-items:center;direction:ltr;text-shadow:0 0 8px rgba(255,255,255,.5)}
+.rec i{width:22px;height:22px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red);animation:b 1s steps(1) infinite}
+@keyframes b{50%{opacity:0}}
+.hero .wrap{position:relative;z-index:2;padding-block:40px 56px;width:100%}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(56px,10vw,128px);line-height:.95;margin:0;text-wrap:balance;text-shadow:-3px 0 0 rgba(255,42,58,.85),3px 0 0 rgba(63,226,255,.85)}
+.en{font-family:var(--osd);font-size:26px;color:var(--cyan);letter-spacing:4px;direction:ltr;text-align:right}
+.lead{max-width:60ch;font-size:19px;color:#cfd8ff;margin:12px 0 22px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:17px;padding:14px 26px;border:2px solid var(--cyan);color:var(--cyan)}
+.btn:hover,.btn:focus-visible{background:var(--cyan);color:#020208}
+.btn.solid{background:var(--red);border-color:var(--red);color:#fff}
+.btn.solid:hover{background:#fff;color:var(--red);border-color:#fff}
+.btn.gold{background:linear-gradient(180deg,#ffe58a,#d9a521);border-color:#ffe58a;color:#2a1a00}
+.btn.gold:hover{filter:brightness(1.1)}
+.meta{font-family:var(--osd);font-size:20px;color:var(--dim);direction:ltr;text-align:right;margin-top:14px}
+section{padding-block:64px}
+h2{font-family:var(--display);font-weight:400;font-size:42px;margin:0 0 6px}
+.tag{font-family:var(--osd);color:var(--cyan);letter-spacing:3px;font-size:20px;direction:ltr;text-align:right}
+.editions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:22px;margin-top:26px}
+.ed{background:var(--panel);border:1px solid var(--line);padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.ed.gold{border-color:#7a5a12;background:radial-gradient(120% 90% at 85% 10%,rgba(243,198,74,.16),transparent 60%),var(--panel)}
+.ed-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.ed h3{font-family:var(--display);font-weight:400;font-size:32px;margin:0}
+.price{font-family:var(--osd);font-size:54px;line-height:1;direction:ltr;text-align:right}
+.ed.gold .price{color:var(--gold);text-shadow:0 0 18px rgba(243,198,74,.45)}
+.ed ul{margin:0;padding-inline-start:20px;color:#cfd8ff}
+.ed .btn{align-self:flex-start;margin-top:auto}
+.egg{width:130px;flex:none;filter:drop-shadow(0 0 22px rgba(243,198,74,.55));animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px) rotate(3deg)}}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin-top:22px}
+.gal figure{margin:0;border:1px solid var(--line);background:#000}
+.gal img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.gal figcaption{padding:8px 12px;font-size:14px;color:var(--dim)}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:18px;margin-top:22px}
+.feat div{border-top:2px solid var(--cyan);padding-top:12px}
+.feat b{display:block;font-size:18px}
+.feat span{color:var(--dim);font-size:15px}
+.req{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 22px;margin-top:18px;max-width:640px}
+.req dt{font-family:var(--osd);font-size:22px;color:var(--cyan);direction:ltr}
+.req dd{margin:0;color:#cfd8ff}
+.note{color:var(--dim);font-size:14px;margin-top:14px}
+footer{border-top:1px solid var(--line);padding-block:26px;color:var(--dim);font-size:14px}
+@media (prefers-reduced-motion:reduce){.egg,.rec i{animation:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <img src="shot-aim.jpg" alt="لقطة من اللعبة: مسدس مصوّب داخل المول والظلال واقفة">
+  <div class="wrap">
+    <div class="en">THE LAST RECORDING</div>
+    <h1>التسجيل الأخير</h1>
+    <p class="lead">٣:٣٣ الفجر. ميغا مول مقفّل من سبع سنين، و٢١٤ شخص اختفوا فيه بليلة وحدة. الأضواء رجعت تشتغل. معك كاميرا، ومسدس، واثنعشر طلقة. لا تعطيهم ظهرك.</p>
+    <div class="cta"><a class="btn solid" href="#editions">احصل على اللعبة</a><a class="btn" href="play/">العب من المتصفح</a></div>
+    <div class="meta">WINDOWS 10/11 · VER <span id="ver">00.00.01</span> · ONLINE CO-OP</div>
+  </div>
+</header>
+
+<main>
+<section class="wrap" id="editions">
+  <div class="tag">EDITIONS</div>
+  <h2>اختر نسختك</h2>
+  <div class="editions">
+    <article class="ed">
+      <div class="ed-head"><h3>النسخة القياسية</h3></div>
+      <div class="price">$69.99</div>
+      <ul><li>القصة كاملة والأشرطة الخمسة</li><li>أونلاين مع أصحابك بكود غرفة</li><li>التحديثات توصلك تلقائياً</li></ul>
+      <a class="btn solid dl" href="https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Windows-Setup.exe">تحميل للويندوز</a>
+    </article>
+    <article class="ed gold">
+      <div class="ed-head">
+        <h3>النسخة الذهبية</h3>
+        <svg class="egg" viewBox="0 0 120 150" role="img" aria-label="بيضة ذهبية">
+          <defs>
+            <radialGradient id="g1" cx="38%" cy="30%" r="75%"><stop offset="0" stop-color="#fff6c8"/><stop offset=".25" stop-color="#ffd860"/><stop offset=".6" stop-color="#d79c1c"/><stop offset="1" stop-color="#7a4a06"/></radialGradient>
+            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a5a0a"/><stop offset=".5" stop-color="#ffe9a0"/><stop offset="1" stop-color="#8a5a0a"/></linearGradient>
+          </defs>
+          <ellipse cx="60" cy="140" rx="34" ry="6" fill="#000" opacity=".45"/>
+          <path d="M60 6C88 6 108 54 108 88c0 30-21 50-48 50S12 118 12 88C12 54 32 6 60 6z" fill="url(#g1)"/>
+          <path d="M15 82c14 6 30 8 45 8s31-2 45-8" stroke="url(#g2)" stroke-width="6" fill="none"/>
+          <path d="M20 100c12 5 26 7 40 7s28-2 40-7" stroke="#a8740f" stroke-width="2" fill="none" opacity=".7"/>
+          <g fill="#fff3b8"><circle cx="38" cy="86" r="3"/><circle cx="60" cy="90" r="3.4"/><circle cx="82" cy="86" r="3"/></g>
+          <ellipse cx="42" cy="38" rx="11" ry="18" fill="#fff" opacity=".55" transform="rotate(-20 42 38)"/>
+          <path d="M96 22l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#fff8d6"/>
+          <path d="M22 120l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#fff8d6" opacity=".8"/>
+        </svg>
+      </div>
+      <div class="price">$999,999.99</div>
+      <ul><li>كل شي في النسخة القياسية</li><li>البيضة الذهبية</li><li>اسمك يبقى في تاريخ المول للأبد</li></ul>
+      <a class="btn gold dl" href="https://github.com/abdullra7manx-cmyk/last-recording/releases/latest/download/LastRecording-Windows-Setup.exe">تحميل للويندوز</a>
+    </article>
+  </div>
+  <p class="note">ويندوز ممكن يطلع تحذير لأن البرنامج غير موقّع: اضغط More info ثم Run anyway. بعد التثبيت، اللعبة تحدّث نفسها تلقائياً كل ما تفتحها وأنت متصل بالإنترنت.</p>
+</section>
+
+<section class="wrap">
+  <div class="tag">SCREENSHOTS</div>
+  <h2>من داخل المول</h2>
+  <div class="gal">
+    <figure><img src="shot-aim.jpg" alt="تصويب المسدس على ظل" loading="lazy"><figcaption>الطلقة في الراس تقتل. لا تضيّع ولا طلقة.</figcaption></figure>
+    <figure><img src="shot-siren.jpg" alt="العالم الأحمر بعد الصفّارة" loading="lazy"><figcaption>إذا سمعت الصفّارة… المول ما عاد هو المول.</figcaption></figure>
+    <figure><img src="shot-menu.jpg" alt="القائمة الرئيسية" loading="lazy"><figcaption>القائمة الرئيسية — قصة، أونلاين، إعدادات.</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="tag">FEATURES</div>
+  <h2>وش ينتظرك</h2>
+  <div class="feat">
+    <div><b>رعب نفسي</b><span>ظلال ما تتحرك وأنت تطالع فيها، وراديو يصفّر لما يقربون.</span></div>
+    <div><b>مسدس وذخيرة محدودة</b><span>تصويب، تعبئة، ودم. كل طلقة لها حساب.</span></div>
+    <div><b>الصفّارة</b><span>المول يتحوّل لعالم أحمر مظلم والظلال تركض عليك.</span></div>
+    <div><b>أونلاين</b><span>أنشئ غرفة وأرسل الكود لأصحابك، وتشوفون بعض داخل المول.</span></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="tag">SYSTEM</div>
+  <h2>متطلبات التشغيل</h2>
+  <dl class="req">
+    <dt>OS</dt><dd>Windows 10 أو 11 (64-bit)</dd>
+    <dt>GPU</dt><dd>كرت شاشة يدعم WebGL — أي كرت من آخر ٨ سنين</dd>
+    <dt>RAM</dt><dd>4GB أو أكثر</dd>
+    <dt>DISK</dt><dd>300MB</dd>
+    <dt>NET</dt><dd>للتحديثات والأونلاين فقط</dd>
+  </dl>
+</section>
+</main>
+<footer><div class="wrap">التسجيل الأخير · <a href="https://github.com/abdullra7manx-cmyk/last-recording/blob/main/CHANGELOG.md">سجل التحديثات</a></div></footer>
+<script>
+fetch('version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{if(v&&v.version)document.getElementById('ver').textContent=String(v.version).slice(0,12)}).catch(()=>{});
+</script>
+</body>
+</html>

@@ -605,7 +605,7 @@ function loadHuman(){return new Promise(res=>{
   let L;try{L=new THREE.GLTFLoader()}catch(e){return res()}
   const ok=g=>{HUMAN={scene:g.scene,clips:g.animations.filter(c=>c.name!=='TPose')};const b=new THREE.Box3().setFromObject(g.scene);HUMAN_H=Math.max(.5,b.max.y-b.min.y);res()},bad=()=>res();
   try{if(window.SOLDIER_B64){const s=atob(window.SOLDIER_B64),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);L.parse(u.buffer,'',ok,bad)}
-    else fetch('soldier.glb').then(r=>{if(!r.ok)throw 0;return r.arrayBuffer()}).then(b=>L.parse(b,'',ok,bad)).catch(bad)}catch(e){bad()}
+    else fetch('soldier.txt').then(r=>{if(!r.ok)throw 0;return r.text()}).then(t=>{const x=atob(t.trim()),u=new Uint8Array(x.length);for(let i=0;i<x.length;i++)u[i]=x.charCodeAt(i);L.parse(u.buffer,'',ok,bad)}).catch(bad)}catch(e){bad()}
   setTimeout(res,15000)})}
 const shadowMat=new THREE.MeshLambertMaterial({color:0x040405,skinning:true});
 function makeHuman(kind,col){
